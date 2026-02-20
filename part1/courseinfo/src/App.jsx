@@ -4,6 +4,16 @@ const Header = (props) => {
 
 const Content = (props) => {
 	return (
+		<div className="">
+			<Part part={props.part.part1} exercises={props.part.exercises1} />
+			<Part part={props.part.part2} exercises={props.part.exercises2} />
+			<Part part={props.part.part3} exercises={props.part.exercises3} />
+		</div>
+	);
+};
+
+const Part = (props) => {
+	return (
 		<p>
 			{props.part} {props.exercises}
 		</p>
@@ -23,12 +33,20 @@ const App = () => {
 	const exercises2 = 7;
 	const part3 = "State of a component";
 	const exercises3 = 14;
+
+	const part = {
+		part1,
+		part2,
+		part3,
+		exercises1,
+		exercises2,
+		exercises3,
+	};
+
 	return (
 		<div>
 			<Header course={course} />
-			<Content exercises={exercises1} part={part1} />
-			<Content exercises={exercises2} part={part2} />
-			<Content exercises={exercises3} part={part3} />
+			<Content part={part} />
 			<Total total={exercises1 + exercises2 + exercises3} />
 		</div>
 	);
