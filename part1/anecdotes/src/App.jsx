@@ -14,9 +14,8 @@ const App = () => {
 	const [selected, setSelected] = useState(0);
 	const [votes, setVotes] = useState({});
 
-	const generateRandomNumber = () => {
-		return Math.floor(Math.random() * anecdotes.length);
-	};
+	const generateRandomNumber = () =>
+		Math.floor(Math.random() * anecdotes.length);
 
 	const handleDisplayRandom = () => {
 		const randomNumber = generateRandomNumber();
@@ -30,20 +29,40 @@ const App = () => {
 		setVotes(copy); // on passe la copy dans le state
 	};
 
+	const allVoteCounts = Object.values(votes); // on obtient un tableau avec les valeurs de l'objet
+	const maxVotes = allVoteCounts.length === 0 ? 0 : Math.max(...allVoteCounts); // on recupère la valeur max
+
+	// on transforme les clé de l'objet en tableau 
+	// .find => prend en argument la clé une par une 
+	// on cherche pour chaque clé de l'objet, si la valeur est égale à la valeur max du vote 
+	// on retourne directement l'anecdate dans la vriable
+	const winnerText = Object.keys(votes).find((key) => votes[key] === maxVotes); // on récupère l'anecdote avec la meilleur note
+
 	return (
 		<div>
-			<div className="">{anecdotes[selected]}</div>
+			<h2>Anecdote of the day</h2>
+			<Anecdote text={anecdotes[selected]} />
 
 			<p>has {votes[anecdotes[selected]] || 0} votes</p>
 
-			<button type="button" onClick={() => handleVote(anecdotes[selected])}>
-				Vote
-			</button>
+			<Button text="Vote" handleClick={() => handleVote(anecdotes[selected])} />
+			<Button text="Next anecdote" handleClick={handleDisplayRandom} />
 
-			<button type="button" onClick={handleDisplayRandom}>
-				next anecdote
-			</button>
+			<h2>Anecdote with most value</h2>
+			<Anecdote text={winnerText} />
 		</div>
+	);
+};
+
+const Anecdote = ({ text }) => {
+	return <p>{text}</p>;
+};
+
+const Button = ({ text, handleClick }) => {
+	return (
+		<button type="button" onClick={handleClick}>
+			{text}
+		</button>
 	);
 };
 
