@@ -28,10 +28,16 @@ const Button = ({ text, onClick }) => {
 };
 
 const StatisticsLine = ({ text, value }) => {
+	const arrondi = Math.round(value * 100) / 100;
 	return (
-		<p>
-			{text} {value}
-		</p>
+		<table>
+			<tbody>
+				<tr>
+					<td>{text}</td>
+					<td>{text === "positif" ? `${arrondi} %` : arrondi}</td>
+				</tr>
+			</tbody>
+		</table>
 	);
 };
 
@@ -55,7 +61,7 @@ const App = () => {
 
 	const average = total === 0 ? 0 : (good - bad) / total;
 
-	const positif = total === 0 ? 0 : `${(good / total) * 100} %`;
+	const positif = total === 0 ? 0 : (good / total) * 100;
 
 	const stats = {
 		total,
