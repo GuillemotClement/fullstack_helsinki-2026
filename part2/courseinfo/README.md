@@ -1,16 +1,20 @@
-# React + Vite
+# Courseinfo 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 2.1: courseinfo étape6
 
-Currently, two official plugins are available:
+Définissez un composant responsable de la mise en forme d'un seul cours appelé Course.
+Par conséquent, le composant Course contient les composants définis dans la partie précédente, qui sont responsables du rendu du nom du cours et de ses parties.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+L'application doit fonctionner quel que soit le nombre de parties d'un cours, alors assurez-vous que l'application fonctionne si vous ajoutez ou supprimez des parties d'un cours.
 
-## React Compiler
+## 2.2: courseinfo étape7
+Afficher aussi la somme des exercices du cours.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 2.3*: courseinfo étape8
+Si vous ne l'avez pas déjà fait, calculez la somme des exercices avec la méthode array reduce.
 
-## Expanding the ESLint configuration
+## 2.4: courseinfo étape9
+Étendons notre application pour permettre un nombre arbitraire de cours
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 2.5: separation des modules
+Déclarez le composant Course en tant que module séparé, qui est importé par le composant App. Vous pouvez inclure tous les sous-composants du cours dans le même module.
