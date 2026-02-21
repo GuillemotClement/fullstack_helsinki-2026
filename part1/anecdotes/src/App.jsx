@@ -12,21 +12,35 @@ const App = () => {
 	];
 
 	const [selected, setSelected] = useState(0);
+	const [votes, setVotes] = useState({});
 
 	const generateRandomNumber = () => {
 		return Math.floor(Math.random() * anecdotes.length);
 	};
 
-	const handleClik = () => {
+	const handleDisplayRandom = () => {
 		const randomNumber = generateRandomNumber();
 		setSelected(randomNumber);
+	};
+
+	const handleVote = (index) => {
+		// on passe l'index d'élément
+		const copy = { ...votes }; // on créer la copie du state
+		copy[index] = (copy[index] || 0) + 1; // si pas valeur on lui passe 0 sinon on lui passe +1
+		setVotes(copy); // on passe la copy dans le state
 	};
 
 	return (
 		<div>
 			<div className="">{anecdotes[selected]}</div>
 
-			<button type="button" onClick={handleClik}>
+			<p>has {votes[anecdotes[selected]] || 0} votes</p>
+
+			<button type="button" onClick={() => handleVote(anecdotes[selected])}>
+				Vote
+			</button>
+
+			<button type="button" onClick={handleDisplayRandom}>
 				next anecdote
 			</button>
 		</div>
