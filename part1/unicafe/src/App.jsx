@@ -2,15 +2,20 @@ import { useState } from "react";
 
 const Statistics = ({ stats }) => {
 	const { good, neutral, bad, total, average, positif } = stats;
+
+	if (total === 0) {
+		return <p>No feedback given</p>;
+	}
+
 	return (
-		<div>
+		<>
 			<Result text="good" result={good} />
 			<Result text="neutral" result={neutral} />
 			<Result text="bad" result={bad} />
 			<Result text="all" result={total} />
 			<Result text="average" result={average} />
 			<Result text="positif" result={positif} />
-		</div>
+		</>
 	);
 };
 
@@ -50,7 +55,7 @@ const App = () => {
 
 	const average = total === 0 ? 0 : (good - bad) / total;
 
-	const positif = total === 0 ? 0 : (good / total) * 100;
+	const positif = total === 0 ? 0 : `${(good / total) * 100} %`;
 
 	const stats = {
 		total,
@@ -70,7 +75,9 @@ const App = () => {
 				<Button text="bad" onClick={handleClickBad} />
 			</div>
 			<h2>statistics</h2>
-			<Statistics stats={stats} />
+			<div className="">
+				<Statistics stats={stats} />
+			</div>
 		</div>
 	);
 };
