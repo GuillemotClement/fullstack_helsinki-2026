@@ -9,12 +9,12 @@ const Statistics = ({ stats }) => {
 
 	return (
 		<>
-			<Result text="good" result={good} />
-			<Result text="neutral" result={neutral} />
-			<Result text="bad" result={bad} />
-			<Result text="all" result={total} />
-			<Result text="average" result={average} />
-			<Result text="positif" result={positif} />
+			<StatisticsLine text="good" value={good} />
+			<StatisticsLine text="neutral" value={neutral} />
+			<StatisticsLine text="bad" value={bad} />
+			<StatisticsLine text="all" value={total} />
+			<StatisticsLine text="average" value={average} />
+			<StatisticsLine text="positif" value={positif} />
 		</>
 	);
 };
@@ -27,10 +27,10 @@ const Button = ({ text, onClick }) => {
 	);
 };
 
-const Result = ({ text, result }) => {
+const StatisticsLine = ({ text, value }) => {
 	return (
 		<p>
-			{text} {result}
+			{text} {value}
 		</p>
 	);
 };
