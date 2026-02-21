@@ -1,7 +1,17 @@
 import { useState } from "react";
 
-const Title = ({ text }) => {
-	return <h2>{text}</h2>;
+const Statistics = ({ stats }) => {
+	const { good, neutral, bad, total, average, positif } = stats;
+	return (
+		<div>
+			<Result text="good" result={good} />
+			<Result text="neutral" result={neutral} />
+			<Result text="bad" result={bad} />
+			<Result text="all" result={total} />
+			<Result text="average" result={average} />
+			<Result text="positif" result={positif} />
+		</div>
+	);
 };
 
 const Button = ({ text, onClick }) => {
@@ -42,23 +52,25 @@ const App = () => {
 
 	const positif = total === 0 ? 0 : (good / total) * 100;
 
+	const stats = {
+		total,
+		average,
+		positif,
+		good,
+		neutral,
+		bad,
+	};
+
 	return (
 		<div>
-			<Title text="give feedback" />
+			<h1>Give Feedback !</h1>
 			<div className="">
 				<Button text="good" onClick={handleClickGood} />
 				<Button text="neutral" onClick={handleClickNeutral} />
 				<Button text="bad" onClick={handleClickBad} />
 			</div>
-			<Title text="statistics" />
-			<div className="">
-				<Result text="good" result={good} />
-				<Result text="neutral" result={neutral} />
-				<Result text="bad" result={bad} />
-				<Result text="all" result={total} />
-				<Result text="average" result={average} />
-				<Result text="positif" result={positif} />
-			</div>
+			<h2>statistics</h2>
+			<Statistics stats={stats} />
 		</div>
 	);
 };
