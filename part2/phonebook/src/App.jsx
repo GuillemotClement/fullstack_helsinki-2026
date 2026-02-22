@@ -6,6 +6,8 @@ const App = () => {
 	]);
 	const [newName, setNewName] = useState("");
 	const [newTel, setNewTel] = useState("");
+	const [searchName, setSearchName] = useState("");
+	const [showAll, setShowAll] = useState(true);
 
 	const addNumber = (event) => {
 		event.preventDefault();
@@ -43,9 +45,24 @@ const App = () => {
 		setNewTel(event.target.value);
 	};
 
+	const handleSearchName = (event) => {
+		setShowAll(false);
+		setSearchName(event.target.value);
+	};
+
+	const personsToShow = showAll
+		? persons
+		: persons.filter((person) => person.name === searchName);
+
 	return (
 		<div>
 			<h2>Phonebook</h2>
+
+			<div className="">
+				<p>Filter shown with</p>
+				<input type="text" value={searchName} onChange={handleSearchName} />
+			</div>
+
 			<form onSubmit={addNumber}>
 				<div>
 					name: <input onChange={handleNameChange} value={newName} required />
@@ -64,7 +81,7 @@ const App = () => {
 				</div>
 			</form>
 			<h2>Numbers</h2>
-			{persons.map((person) => (
+			{personsToShow.map((person) => (
 				<p key={person.name}>
 					{person.name} - {person.tel}
 				</p>
