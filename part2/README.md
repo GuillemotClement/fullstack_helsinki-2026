@@ -5,125 +5,29 @@
 - Récupération et gestion des données stocjées dans un serveur 
 - Style 
 
-## Rendu de collections et modules
-
-
-### Afficher une liste 
-
-Pour itérer des listes, on utilise la méthode `map()`. Cette méthode crée un nouveau tableau dont les éléments ont été créées à partir des éléments du tableau d'origine.
-
-Cette méthode permet de parcourir un tableau.
-
-```js
-// déclaration du tableau 
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    date: '2019-05-30T18:39:34.091Z',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
-    important: true
-  }
-]
-
-// on affiche un élément pour chaque ligne du tableau 
-return (
-  <div>
-    <h1>Notes</h1>
-    <ul>
-      {notes.map(note => 
-        <li key={note.id}>
-          {note.content}
-        </li>
-      )}
-    </ul>
-  </div>
-)
-```
-
-- `notes` : c'est le tableau que l'on souhaite itérer.
-- `note` : argument passé dans la callback. Elle contient la valeur en cours d'itération.
-
-Les éléments générés par la méthode `map()` doivent avoir une valeur de clé unique. Cette valeur permet de déterminer comment mettre à jour la vue générée par un composant lorsque le composant est rendu à nouveau.
-
-La méthode `map()` peut prendre un second argument `i`. Celui ci contient un index des éléments du tableau. Cette méthode n'est pas recommandé, et peut provoquer des problèmes.
-
-```js
-<ul>
-  {notes.map((note, i) => 
-    <li key={i}>
-      {note.content}
-    </li>
-  )}
-</ul>
-```
-
 ---
 
-### Passage d'une liste vers un enfant 
+## Exercice 
 
-On peut venir créer un composant `Note` dédié à l'affichage de l'élément d'une liste. Dans le composant parent, on viendras passer via des props le contenu d'une note.
+### 2.6 : phonebook, étape1
+Créons un répertoire téléphonique simple. Dans cette partie, nous n'ajouterons que des noms au répertoire.
 
-```jsx
-const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
-}
+Commençons par implémenter l'ajout d'une personne au répertoire.
 
-const App = ({ notes }) => {
-  return (
-    <div>
-      <h1>Notes</h1>
-      <ul>
-        { notes.map(note => 
-          <Note key={note.id} note={note} />
-        )}
-      </ul>
-    </div>
-  )
-}
-```
+### 2.7: phonebook, étape2
+Empêcher l'utilisateur d'ajouter des noms qui existent déjà dans le répertoire. Les tableaux JavaScript ont de nombreuses méthodes appropriées pour accomplir cette tâche. Gardez à l'esprit comment fonctionne l'égalité des objets en Javascript.
 
----
+Émettez un avertissement avec la commande alert lorsqu'une telle action est tentée
 
-## Module
+### 2.8: phonebook, étape3
+Développez votre application en permettant aux utilisateurs d'ajouter des numéros de téléphone au répertoire téléphonique. Vous devrez ajouter un deuxième élément input au formulaire (avec son propre gestionnaire d'événements)
 
-Dans une application React, on utilise un fichier pour un module. 
+### 2.9*: phonebook, étape4
+Implémentez un champ de recherche qui peut être utilisé pour filtrer la liste des personnes par nom 
 
-Par convention, on utilise le répertoire `src/components` pour y placer les composants d'une application. Le fichier est nommé d'après son composant.
+### 2.10: phonebook étape5
+Si vous avez implémenté votre application dans un seul composant, refactorisez-le en extrayant les parties appropriées dans de nouveaux composants. Conservez l'état de l'application et tous les gestionnaires d'événements dans le composant racine App.
 
-Par exemple, le fichier `src/components/Note.jsx` :
+Il suffit d'extraire trois composants de l'application. De bons candidats pour des composants séparés sont, par exemple, le filtre de recherche, le formulaire d'ajout de nouvelles personnes dans l'annuaire, un composant qui affiche toutes les personnes de l'annuaire et un composant qui affiche les détails d'une seule personne.
 
-```jsx
-import React from 'react';
-
-const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
-}
-
-export default Note;
-```
-
-Le fichier qui définit le composant `App`, peut venir importer le module 
-
-```jsx
-import Note from './components/Note';
-
-const App = ({ notes }) => {
-  ...
-}
-```
+Le composant racine de l'application pourrait ressembler à ceci après la refactorisation. Le composant racine refactorisé ci-dessous n'affiche que les titres et laisse les composants extraits s'occuper du reste.
