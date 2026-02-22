@@ -3,6 +3,7 @@ import { useState } from "react";
 const App = () => {
 	const [persons, setPersons] = useState([
 		{ name: "Arto Hellas", tel: "0645231586" },
+		{ name: "gizmo", tel: "0677412030" },
 	]);
 	const [newName, setNewName] = useState("");
 	const [newTel, setNewTel] = useState("");
@@ -50,6 +51,11 @@ const App = () => {
 		setSearchName(event.target.value);
 	};
 
+	const handleResetSearch = () => {
+		setSearchName("");
+		setShowAll(true);
+	};
+
 	const personsToShow = showAll
 		? persons
 		: persons.filter((person) => person.name === searchName);
@@ -61,6 +67,9 @@ const App = () => {
 			<div className="">
 				<p>Filter shown with</p>
 				<input type="text" value={searchName} onChange={handleSearchName} />
+				<button type="button" onClick={handleResetSearch}>
+					Reset
+				</button>
 			</div>
 
 			<form onSubmit={addNumber}>
