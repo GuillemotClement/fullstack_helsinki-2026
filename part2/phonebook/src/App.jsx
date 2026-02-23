@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import axios from "axios";
 
 const App = () => {
-	const [persons, setPersons] = useState([
-		{ name: "Arto Hellas", tel: "0645231586" },
-		{ name: "gizmo", tel: "0677412030" },
-	]);
+	const [persons, setPersons] = useState([]);
 	const [newName, setNewName] = useState("");
 	const [newTel, setNewTel] = useState("");
 	const [searchName, setSearchName] = useState("");
 	const [showAll, setShowAll] = useState(true);
+
+	useEffect(() => {
+		axios.get("http://localhost:3001/persons").then((response) => {
+			setPersons(response.data);
+		});
+	}, []);
 
 	const addNumber = (event) => {
 		event.preventDefault();
@@ -33,7 +37,8 @@ const App = () => {
 
 		const personName = {
 			name: newName,
-			tel: newTel,
+			number: newTel,
+			id: persons.number + 1,
 		};
 
 		setPersons(persons.concat(personName));
@@ -85,7 +90,7 @@ const App = () => {
 
 			<h2>Numbers</h2>
 			{personsToShow.map((person) => (
-				<Persons key={person.name} person={person} />
+				<Persons key={person.id} person={person} />
 			))}
 		</div>
 	);

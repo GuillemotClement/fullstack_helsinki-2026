@@ -1,9 +1,7 @@
-import React from "react";
-
 const Persons = (props) => {
 	return (
 		<p>
-			{props.person.name} - {props.person.tel}
+			{props.person.name} - {props.person.number}
 		</p>
 	);
 };
