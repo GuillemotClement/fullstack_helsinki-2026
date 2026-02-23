@@ -34,3 +34,25 @@ Le composant racine de l'application pourrait ressembler à ceci après la refac
 
 ### 2.11: phonebook, étape6
 Nous continuons à développer le répertoire. Stockez l'état initial de l'application dans le fichier db.json, qui doit être placé à la racine du projet.
+
+### 2.12: phonebook, étape7
+Revenons à notre application de répertoire.
+
+Actuellement, les numéros ajoutés au répertoire ne sont pas enregistrés sur un serveur principal. Corrigez cette situation.
+
+### 2.13: phonebook, étape8
+Extrayez le code qui gère la communication avec le backend dans son propre module en suivant l'exemple présenté précédemment dans cette partie du support de cours.
+
+### 2.14: phonebook étape9
+Permettre aux utilisateurs de supprimer des entrées du répertoire. La suppression peut être effectuée via un bouton dédié pour chaque personne dans la liste du répertoire. Vous pouvez confirmer l'action de l'utilisateur en utilisant la méthode window.confirm :
+
+La ressource associée à une personne dans le backend peut être supprimée en envoyant une requête HTTP DELETE à l'URL de la ressource. Si nous supprimons par ex. une personne qui a l'id 2, il faudrait faire une requête HTTP DELETE à l'URL localhost:3001/persons/2. Aucune donnée n'est envoyée avec la demande.
+
+Vous pouvez effectuer une requête HTTP DELETE avec la bibliothèque axios de la même manière que nous effectuons toutes les autres requêtes.
+
+NB : Vous ne pouvez pas utiliser le nom delete pour une variable car il s'agit d'un mot réservé en JavaScript. Par exemple. ce qui suit n'est pas possible :
+
+### 2.15*: phonebook, étape10
+Modifiez le code de sorte que si un numéro est ajouté à un utilisateur déjà existant, le nouveau numéro remplacera l'ancien numéro. Il est recommandé d'utiliser la méthode HTTP PUT pour mettre à jour le numéro de téléphone.
+
+Si les informations de la personne sont déjà dans le répertoire, l'application peut confirmer l'action de l'utilisateur :

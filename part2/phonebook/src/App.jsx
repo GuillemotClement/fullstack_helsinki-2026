@@ -1,8 +1,8 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
 
 const App = () => {
 	const [persons, setPersons] = useState([]);
@@ -18,6 +18,8 @@ const App = () => {
 	}, []);
 
 	const addNumber = (event) => {
+		const url = "http://localhost:3001/persons";
+
 		event.preventDefault();
 
 		let isExist = false;
@@ -35,13 +37,23 @@ const App = () => {
 			return;
 		}
 
+		const nextId = persons.length + 1;
+
 		const personName = {
 			name: newName,
 			number: newTel,
-			id: persons.number + 1,
+			id: String(nextId),
 		};
 
-		setPersons(persons.concat(personName));
+		axios
+			.post(url, personName)
+			.then((response) => {
+				setPersons(persons.concat(response.data));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
 		setNewName("");
 		setNewTel("");
 	};
