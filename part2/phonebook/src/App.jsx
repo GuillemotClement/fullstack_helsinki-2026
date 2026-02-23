@@ -67,6 +67,17 @@ const App = () => {
 				person.name.toLowerCase().includes(searchName.toLocaleLowerCase()),
 			);
 
+	const handleDelete = (person) => {
+		if (confirm(`Delete ${person.name} ?`)) {
+			personService
+				.deletePerson(person.id)
+				.then(() => {
+					setPersons(persons.filter((p) => p.id !== person.id));
+				})
+				.catch((err) => console.error(err));
+		}
+	};
+
 	return (
 		<div>
 			<h2>Phonebook</h2>
@@ -85,7 +96,7 @@ const App = () => {
 
 			<h2>Numbers</h2>
 			{personsToShow.map((person) => (
-				<Persons key={person.id} person={person} />
+				<Persons key={person.id} person={person} handleDelete={handleDelete} />
 			))}
 		</div>
 	);

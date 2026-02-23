@@ -1,8 +1,13 @@
 const Persons = (props) => {
 	return (
-		<p>
-			{props.person.name} - {props.person.number}
-		</p>
+		<div className="">
+			<p>
+				{props.person.name} - {props.person.number}
+			</p>
+			<button onClick={() => props.handleDelete(props.person)} type="button">
+				Delete
+			</button>
+		</div>
 	);
 };
 
