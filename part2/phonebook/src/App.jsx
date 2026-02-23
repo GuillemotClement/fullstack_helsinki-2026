@@ -22,18 +22,15 @@ const App = () => {
 
 		event.preventDefault();
 
-		let isExist = false;
+		// some() => retourne True si un élément valide la condition
+		// si le nom saisis est déjà présent dans le tableau, on retourne true
+		const isExist = persons.some((person) => person.name === newName);
 
-		persons.forEach((person) => {
-			if (person.name === newName) {
-				alert(`${newName} is already added to phonebook`);
-				isExist = true;
-				setNewName("");
-				setNewTel("");
-			}
-		});
-
+		// si le nom est présent, on affiche une alerte, on vide les inputs et on stop la fonction
 		if (isExist) {
+			alert(`${newName} is already added to phonebook`);
+			setNewName("");
+			setNewTel("");
 			return;
 		}
 
