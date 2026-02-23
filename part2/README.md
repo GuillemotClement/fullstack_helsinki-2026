@@ -31,3 +31,6 @@ Si vous avez implémenté votre application dans un seul composant, refactorisez
 Il suffit d'extraire trois composants de l'application. De bons candidats pour des composants séparés sont, par exemple, le filtre de recherche, le formulaire d'ajout de nouvelles personnes dans l'annuaire, un composant qui affiche toutes les personnes de l'annuaire et un composant qui affiche les détails d'une seule personne.
 
 Le composant racine de l'application pourrait ressembler à ceci après la refactorisation. Le composant racine refactorisé ci-dessous n'affiche que les titres et laisse les composants extraits s'occuper du reste.
+
+### 2.11: phonebook, étape6
+Nous continuons à développer le répertoire. Stockez l'état initial de l'application dans le fichier db.json, qui doit être placé à la racine du projet.
