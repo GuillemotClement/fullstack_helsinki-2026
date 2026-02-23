@@ -24,7 +24,9 @@ const App = () => {
 
 		// some() => retourne True si un élément valide la condition
 		// si le nom saisis est déjà présent dans le tableau, on retourne true
-		const isExist = persons.some((person) => person.name === newName);
+		const isExist = persons.some(
+			(person) => person.name.toLowerCase() === newName.toLowerCase(),
+		);
 
 		// si le nom est présent, on affiche une alerte, on vide les inputs et on stop la fonction
 		if (isExist) {
@@ -68,25 +70,18 @@ const App = () => {
 		setSearchName(event.target.value);
 	};
 
-	const handleResetSearch = () => {
-		setSearchName("");
-		setShowAll(true);
-	};
-
 	const personsToShow = showAll
 		? persons
-		: persons.filter((person) => person.name === searchName);
+		: persons.filter((person) =>
+				person.name.toLowerCase().includes(searchName.toLocaleLowerCase()),
+			);
 
 	return (
 		<div>
 			<h2>Phonebook</h2>
 
 			<div className="">
-				<Filter
-					handleSearchName={handleSearchName}
-					handleResetSearch={handleResetSearch}
-					searchName={searchName}
-				/>
+				<Filter handleSearchName={handleSearchName} searchName={searchName} />
 			</div>
 
 			<PersonForm

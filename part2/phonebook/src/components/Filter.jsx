@@ -7,9 +7,6 @@ const Filter = (props) => {
 				value={props.searchName}
 				onChange={props.handleSearchName}
 			/>
-			<button type="button" onClick={props.handleResetSearch}>
-				Reset
-			</button>
 		</>
 	);
 };
