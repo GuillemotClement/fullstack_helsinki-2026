@@ -18,18 +18,39 @@ const App = () => {
 	const addNumber = (event) => {
 		event.preventDefault();
 
-		// some() => retourne True si un élément valide la condition
-		// si le nom saisis est déjà présent dans le tableau, on retourne true
-		const isExist = persons.some(
-			(person) => person.name.toLowerCase() === newName.toLowerCase(),
-		);
+		const person = persons.find(
+			(p) => p.name.toLocaleLowerCase() === newName.toLocaleLowerCase(),
+		); // retourne user de la liste
 
-		// si le nom est présent, on affiche une alerte, on vide les inputs et on stop la fonction
-		if (isExist) {
-			alert(`${newName} is already added to phonebook`);
-			setNewName("");
-			setNewTel("");
-			return;
+		// si on as une personne de trouver, on passe dans le demande de confirm pour update le numéro de tel
+		if (person) {
+			if (
+				confirm(
+					`${newName} is already added to phonebook, replace the old number with a new one ?`,
+				)
+			) {
+				// on récupère l'objet person avec la nouvelle valeur pour le numéro
+				const changedPerson = { ...person, number: newTel };
+
+				// on viens update cette personne
+				personService
+					.updatePerson(person.id, changedPerson)
+					.then((returnedPerson) => {
+						setPersons(
+							// on change le state pour obtenir l'utpdate de la person
+							persons.map((person) =>
+								person.id !== returnedPerson.id ? person : returnedPerson,
+							),
+						);
+						// on vide le formulaire
+						setNewName("");
+						setNewTel("");
+					})
+					.catch((err) => {
+						alert(`the person ${person.name} failed update : `, err);
+					});
+			}
+			return; // on termine la fonction pour ne pas ajouter un nouvel utilisateur en double
 		}
 
 		const nextId = persons.length + 1;
